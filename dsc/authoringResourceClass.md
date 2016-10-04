@@ -1,3 +1,14 @@
+---
+title:   Writing a custom DSC resource with PowerShell classes
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # Writing a custom DSC resource with PowerShell classes
 
 > Applies To: Windows Windows PowerShell 5.0
@@ -15,8 +26,8 @@ For more information about DSC resources, see [Build Custom Windows PowerShell D
 To implement a DSC custom resource with a PowerShell class, create the following folder structure. The class is defined in **MyDscResource.psm1** and the module manifest is defined in **MyDscResource.psd1**.
 
 ```
-$env: psmodulepath (folder)
-    |- MyDscResources (folder)
+$env:ProgramFiles\WindowsPowerShell\Modules (folder)
+    |- MyDscResource (folder)
         |- MyDscResource.psm1 
            MyDscResource.psd1 
 ```
@@ -462,3 +473,4 @@ Start-DscConfiguration -Wait -Force Test
 ## See Also
 ### Concepts
 [Build Custom Windows PowerShell Desired State Configuration Resources](authoringResource.md)
+

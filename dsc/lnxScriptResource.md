@@ -1,3 +1,14 @@
+---
+title:   DSC for Linux nxScript Resource
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # DSC for Linux nxScript Resource
 
 The **nxScript** resource in PowerShell Desired State Configuration (DSC) provides a mechanism to run Linux scripts on a Linux node.
@@ -30,7 +41,7 @@ nxScript <string> #ResourceName
 
 ## Example
 
-The following example demonstrates the use of the **nxScript** resource to perform additional configuration management...
+The following example demonstrates the use of the **nxScript** resource to perform additional configuration management.
 
 ```
 Import-DSCResource -Module nx 
@@ -61,3 +72,4 @@ fi
 } 
 }
 ```
+

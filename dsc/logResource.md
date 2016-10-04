@@ -1,3 +1,14 @@
+---
+title:   DSC Log Resource 
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # DSC Log Resource 
 
 > Applies To: Windows PowerShell 4.0, Windows PowerShell 5.0
@@ -14,6 +25,12 @@ Log [string] #ResourceName
 }
 ```
 
+NOTE: By default only the Operational logs for DSC are enabled.
+Before the Analytic log will be available or visible, it must be enabled.
+See the following article.
+
+[Where are DSC Event Logs?](https://msdn.microsoft.com/en-us/powershell/dsc/troubleshooting#where-are-dsc-event-logs)
+
 ## Properties
 |  Property  |  Description   | 
 |---|---| 
@@ -27,9 +44,18 @@ The following example shows how to include a message in the Microsoft-Windows-De
 > **Note**: if you run [Test-DscConfiguration](https://technet.microsoft.com/en-us/library/dn407382.aspx) with this resource configured, it will always return **$false**.
 
 ```powershell 
-Log LogExample
+Configuration logResourceTest
 {
-    Message = "This message will appear in the Microsoft-Windows-Desired State Configuration/Analytic event log."
-} 
+    Import-DscResource -ModuleName PSDesiredStateConfiguration
+
+    Node localhost
+
+    {
+        Log LogExample
+        {
+            Message = "This message will appear in the Microsoft-Windows-Desired State Configuration/Analytic event log."
+        }
+    }
+}
 ```
 

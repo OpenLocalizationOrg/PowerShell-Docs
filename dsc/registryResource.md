@@ -1,3 +1,14 @@
+---
+title:   DSC Registry Resource
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # DSC Registry Resource
 
 > Applies To: Windows PowerShell 4.0, Windows PowerShell 5.0
@@ -49,13 +60,22 @@ Registry [string] #ResourceName
 <li>Expandable string (REG_EXPAND_SZ)</li></ul>
 
 ## Example
+This example ensures that a key named "ExampleKey" is present in the **HKEY\_LOCAL\_MACHINE** hive.
 ```powershell
-Registry RegistryExample
+Configuration RegistryTest
 {
-    Ensure = "Present"  # You can also set Ensure to "Absent"
-    Key = "HKEY_LOCAL_MACHINE\SOFTWARE\ExampleKey"
-    ValueName = "TestValue"
-    ValueData = "TestData"
+    Registry RegistryExample
+    {
+        Ensure      = "Present"  # You can also set Ensure to "Absent"
+        Key         = "HKEY_LOCAL_MACHINE\SOFTWARE\ExampleKey"
+        ValueName   = "TestValue"
+        ValueData   = "TestData"
+    }
 }
 ```
+
+>**Note:** Changing a registry setting in the **HKEY\_CURRENT\_USER** hive requires that the configuration runs with user credentials, rather than as the system.
+>You can use the **PsDscRunAsCredential** property to specify user credentials for the configuration. For an example, see [Running DSC with user credentials](runAsUser.md)
+
+
 

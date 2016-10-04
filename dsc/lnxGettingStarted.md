@@ -1,3 +1,14 @@
+---
+title:   Get started with Desired State Configuration (DSC) for Linux
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # Get started with Desired State Configuration (DSC) for Linux
 
 This topic explains how to get started using PowerShell Desired State Configuration (DSC) for Linux. For general information about DSC, see [Get Started with Windows PowerShell Desired State Configuration](overview.md).
@@ -12,7 +23,7 @@ The following Linux operating system versions are supported for DSC for Linux.
 - SUSE Linux Enterprise Server 10, 11 and 12 (x86/x64)
 - Ubuntu Server 12.04 LTS and 14.04 LTS (x86/x64)
 
-The following table describes the required ackage dependencies for DSC for Linux.
+The following table describes the required package dependencies for DSC for Linux.
 
 |  Required package |  Description |  Minimum version | 
 |---|---|---|
@@ -41,6 +52,8 @@ Run the following command to install OMI on a CentOS 7 x64 system.
 
 ### Installing DSC
 
+DSC for Linux is available for download [here](https://github.com/Microsoft/PowerShell-DSC-for-Linux/releases/latest). 
+
 To install DSC, install the package that is appropriate for your Linux system (.rpm or .deb) and OpenSSL version (ssl_098 or ssl_100), and architecture (x64/x86). RPM packages are appropriate for CentOS, Red Hat Enterprise Linux, SUSE Linux Enterprise Server, and Oracle Linux. DEB packages are appropriate for Debian GNU/Linux and Ubuntu Server. The ssl_098 packages are appropriate for computers with OpenSSL 0.9.8 installed while the ssl_100 packages are appropriate for computers with OpenSSL 1.0 installed.
 
 > **Note**: To determine the installed OpenSSL version, run the command openssl version.
@@ -60,7 +73,7 @@ The Windows PowerShell Configuration keyword is used to create a configuration f
 
 1. Import the nx module. The nx Windows PowerShell module contains the schema for Built-In resources for DSC for Linux, and must be installed to your local computer and imported in the configuration.
 
-    -To install the nx module, copy the nx module directory to either `%UserProfile%\Documents\WindowsPowerShell\Modules\` or `C:\windows\system32\WindowsPowerShell\v1.0\Modules`. The nx module is included in the DSC for Linux installation package (MSI). To import the nx module in your configuration, use the __Import-DSCResource__ command:
+    -To install the nx module, copy the nx module directory to either `$env:USERPROFILE\Documents\WindowsPowerShell\Modules\` or `$PSHOME\Modules`. The nx module is included in the DSC for Linux installation package (MSI). To import the nx module in your configuration, use the __Import-DSCResource__ command:
     
 ```powershell
 Configuration ExampleConfiguration{
@@ -74,7 +87,7 @@ Configuration ExampleConfiguration{
 ```powershell
 Configuration ExampleConfiguration{
    
-    Import-DSCResource -Module nx
+    Import-DscResource -Module nx
  
     Node  "linuxhost.contoso.com"{
     nxFile ExampleFile {
@@ -116,7 +129,7 @@ If this certificate is not trusted by the Windows computer that you are running 
 
 Run the following command to push the DSC configuration to the Linux node.
 
-`Start-DSCConfiguration -Path:"C:\temp" -cimsession:$sess -wait -verbose`
+`Start-DscConfiguration -Path:"C:\temp" -CimSession:$Sess -Wait -Verbose`
 
 ### Distribute the configuration with a pull server
 
@@ -125,17 +138,17 @@ Configurations can be distributed to a Linux computer with a pull server, just l
 ### Working with configurations locally
 
 DSC for Linux includes scripts to work with configuration from the local Linux computer. These scripts are locate in `/opt/microsoft/dsc/Scripts` and include the following:
-* GetConfiguration.py
+* GetDscConfiguration.py
 
  Returns the current configuration applied to the computer. Similar to the Windows PowerShell cmdlet Get-DscConfiguration cmdlet.
 
-`# sudo ./GetConfiguration.py`
+`# sudo ./GetDscConfiguration.py`
 
-* GetMetaConfiguration.py
+* GetDscLocalConfigurationManager.py
 
  Returns the current meta-configuration applied to the computer. Similar to the cmdlet [Get-DSCLocalConfigurationManager](https://technet.microsoft.com/en-us/library/dn407378.aspx) cmdlet.
 
-`# sudo ./GetMetaConfiguration.py`
+`# sudo ./GetDscLocalConfigurationManager.py`
 
 * InstallModule.py
 
@@ -149,17 +162,17 @@ DSC for Linux includes scripts to work with configuration from the local Linux c
 
 `# sudo ./RemoveModule.py cnx_Resource`
 
-* SendConfigurationApply.py
+* StartDscLocalConfigurationManager.py 
 
  Applies a configuration MOF file to the computer. Similar to the [Start-DscConfiguration](https://technet.microsoft.com/en-us/library/dn521623.aspx) cmdlet. Requires the path to the configuration MOF to apply.
 
-`# sudo ./RemoveModule.py cnx_Resource`
+`# sudo ./StartDscLocalConfigurationManager.py –configurationmof /tmp/localhost.mof`
 
-* SendMetaConfiguration.py
+* SetDscLocalConfigurationManager.py
 
  Applies a Meta Configuration MOF file to the computer. Similar to the [Set-DSCLocalConfigurationManager](https://technet.microsoft.com/en-us/library/dn521621.aspx) cmdlet. Requires the path to the Meta Configuration MOF to apply.
 
-`# sudo ./SendMetaConfiguration.py –configurationmof /tmp/localhost.meta.mof`
+`# sudo ./SetDscLocalConfigurationManager.py –configurationmof /tmp/localhost.meta.mof`
 
 ## PowerShell Desired State Configuration for Linux Log Files
 
@@ -167,5 +180,6 @@ The following log files are generated for DSC for Linux messages.
 
 |Log file|Directory|Description|
 |---|---|---|
-|omiserver.log|/opt/omi/var/log/|Messages relating to the operation of the OMI CIM server.|
-|dsc.log|/opt/omi/var/log/|Messages relating to the operation of the Local Configuration Manager (LCM) and DSC resource operations.|
+|omiserver.log|/var/opt/omi/log|Messages relating to the operation of the OMI CIM server.|
+|dsc.log|/var/opt/omi/log|Messages relating to the operation of the Local Configuration Manager (LCM) and DSC resource operations.|
+

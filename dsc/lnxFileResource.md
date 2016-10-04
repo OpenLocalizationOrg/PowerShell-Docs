@@ -1,3 +1,14 @@
+---
+title:   DSC for Linux nxFile Resource
+ms.date:  2016-05-16
+keywords:  powershell,DSC
+description:  
+ms.topic:  article
+author:  eslesar
+manager:  dongill
+ms.prod:  powershell
+---
+
 # DSC for Linux nxFile Resource
 
 The **nxFile** resource in PowerShell Desired State Configuration (DSC) provides a mechanism to to manage files and directories on a Linux node.
@@ -121,7 +132,7 @@ nxFile resolvConf
 
 ## Example
 
-The following example ensures that the directory `/opt/mydir` exists, and that a file with specified contents exists this directory..
+The following example ensures that the directory `/opt/mydir` exists, and that a file with specified contents exists this directory.
 
 ```
 Import-DSCResource -Module nx 
