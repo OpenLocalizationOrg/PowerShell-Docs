@@ -8,6 +8,7 @@
       "!albina/*.md",
       "Sonja/*.md",
       "**/*.md",
+      "**/*.resx",
       "**/**/*.md"
    ],
    "includeDependencies":true,
