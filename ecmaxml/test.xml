@@ -2,7 +2,7 @@
   <TypeSignature Language="C#" Value="public enum TokenType" />
   <Docs>
     <summary>docs summary</summary>
-    <remarks>docs remarks!</remarks>
+    <remarks>docs remarks!!</remarks>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
