@@ -1,8 +1,8 @@
-!<Type Name="TokenType" FullName="Babel.TokenType">
+<Type Name="TokenType" FullName="Babel.TokenType">
   <TypeSignature Language="C#" Value="public enum TokenType" />
   <Docs>
     <summary>docs summary</summary>
-    <remarks>docs remarks!!</remarks>
+    <remarks>docs remarks!!!</remarks>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
